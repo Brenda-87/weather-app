@@ -1,0 +1,91 @@
+body {
+  font-family: "Montserrat", sans-serif;
+}
+h1 {
+  font-size: 20px;
+  padding-top: 5px;
+}
+
+h4 {
+  font-size: 14px;
+}
+form {
+  text-align: right;
+}
+ul {
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+  font-size: 17px;
+  font-weight: bold;
+}
+.container {
+  border-top: 150px;
+  border: solid;
+  border-radius: 5px;
+  margin: 30px auto;
+  max-width: 720px;
+  background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
+}
+.btn-primary {
+  border: 1px solid black;
+  font-size: 13px;
+}
+.week-icons {
+  font-size: 40px;
+  margin: 10px;
+  color: rgb(233, 168, 48);
+}
+.gps-icon {
+  font-size: 30px;
+  margin: 0 0 10px 30px;
+  color: rgb(7, 125, 237);
+}
+.gps-icon:hover {
+  color: rgb(233, 168, 48);
+  transition: ease-in-out, 250ms;
+  cursor: pointer;
+}
+.cloudy-image {
+  background-image: url("images/clouds.png");
+  background-size: 250px;
+  background-repeat: no-repeat;
+  background-position: 60%;
+  min-height: 200px;
+}
+.city {
+  font-size: 13px;
+}
+.card {
+  border: 2px solid;
+  background: rgb(234, 252, 253);
+}
+.card-title {
+  font-size: 15px;
+}
+.card-text {
+  font-size: 15px;
+}
+.current-temp {
+  font-family: "Rubik", sans-serif;
+  font-size: 90px;
+}
+
+.temp-details {
+  font-size: 14px;
+  padding-left: 30px;
+}
+.high-low {
+  font-weight: bold;
+  text-align: left;
+}
+.divider {
+  border-bottom: 2px solid black;
+}
+#current-temp {
+  font-size: 120px;
+  text-align: center;
+  font-weight: bold;
+}

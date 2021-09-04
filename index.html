@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Weather App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
+      integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="../weather-app/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="row mt-2">
+        <div class="col-1">
+          <i class="fas fa-map-marker-alt gps-icon"></i>
+        </div>
+        <div class="col-3">
+          <h1></h1>
+          <h4></h4>
+        </div>
+        <div class="col-7">
+          <form id="city-form">
+            <input
+              id="input-city"
+              type="text"
+              placeholder="Enter city here"
+              class="city"
+            />
+            <input type="submit" value="Search" class="btn btn-primary" />
+          </form>
+        </div>
+      </div>
+
+      <div class="row temp-details">
+        <div class="col-6 p-4 mt-3">
+          <div class="row">
+            <div class="col-6">Feels like</div>
+            <div class="col-6">17°</div>
+          </div>
+          <div class="row">
+            <div class="col-6">Humidity</div>
+            <div class="col-6">81%</div>
+          </div>
+          <div class="row">
+            <div class="col-6">Chance of rain</div>
+            <div class="col-6">29%</div>
+          </div>
+        </div>
+
+        <div class="col-5 cloudy-image">
+          <div class="row">
+            <div class="col-2"></div>
+            <div class="col-7 current-temp">16°</div>
+            <div class="col-4">
+              <a id="unit-celsius" href="#">°C</a> |
+              <a id="unit-fahrenheit" href="#">°F</a>
+            </div>
+          </div>
+          <div class="divider"></div>
+          <div class="row mb-3 high-low">
+            <div class="col-4"></div>
+            <div class="col-4 current-high">H: 18°</div>
+            <div class="col-3 current-low">L: 17°</div>
+            <div class="col-1"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row text-center mb-5">
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Fri</h5>
+              <p class="card-text">
+                <i class="fas fa-cloud-sun week-icons"></i><br />
+                19°
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Sat</h5>
+              <p class="card-text">
+                <i class="fas fa-cloud week-icons"></i><br />
+                18°
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Sun</h5>
+              <p class="card-text">
+                <i class="fas fa-cloud week-icons"></i><br />
+                19°
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Mon</h5>
+              <p class="card-text">
+                <i class="fas fa-cloud-sun week-icons"></i><br />
+                18°
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Tue</h5>
+              <p class="card-text">
+                <i class="fas fa-sun week-icons"></i><br />
+                20°
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="../weather-app/index.js"></script>
+  </body>
+</html>
