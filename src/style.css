@@ -16,16 +16,25 @@ ul {
   list-style-type: none;
 }
 
-a {
+footer {
+  font-size: 10px;
+  text-align: center;
+  margin-top: 0;
+}
+
+a:link {
   text-decoration: none;
+}
+.units {
   font-size: 17px;
   font-weight: bold;
 }
+
 .container {
   border-top: 150px;
   border: solid;
   border-radius: 5px;
-  margin: 30px auto;
+  margin-top: 3%;
   max-width: 720px;
   background: linear-gradient(to right, rgb(182, 244, 146), rgb(51, 139, 147));
 }
