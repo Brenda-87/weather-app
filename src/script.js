@@ -1,9 +1,8 @@
-const axios = require("axios");
 let apiKey = "27c721cb43320f0be5b6cd5b37ef3579";
 
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&`;
 
-function retrievePosition(position) {
+function showPosition(position) {
   console.log(position);
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
@@ -13,14 +12,17 @@ function retrievePosition(position) {
     .then(setCurrentTemperature);
 }
 
-function retrieveCityTemperature(event) {
+function getCurrentPosition() {
+  navigator.geolocation.getCurrentPosition(showPosition);
+}
+
+function submitCityTemperature(event) {
   event.preventDefault();
   let inputCity = document.querySelector("#input-city");
   let units = "metric";
   axios
     .get(`${apiUrl}q=${inputCity.value}&units=${units}`)
     .then(setCurrentTemperature);
-  console.log("test");
 }
 
 function setCurrentTemperature(response) {
@@ -67,11 +69,7 @@ let day = days[now.getDay()];
 h4.innerHTML = `${day}, ${hours}:${minutes}`;
 
 let cityForm = document.querySelector("#city-form");
-cityForm.addEventListener("submit", retrieveCityTemperature);
-
-function getCurrentPosition() {
-  navigator.geolocation.getCurrentPosition(retrievePosition);
-}
+cityForm.addEventListener("submit", submitCityTemperature);
 
 let gpsIcon = document.querySelector(".gps-icon");
 gpsIcon.addEventListener("click", getCurrentPosition);
