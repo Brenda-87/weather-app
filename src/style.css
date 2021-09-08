@@ -88,7 +88,6 @@ a:link {
   border-bottom: 2px solid black;
 }
 #current-temp {
-  font-size: 120px;
+  font-size: 100px;
   text-align: center;
-  font-weight: bold;
 }
