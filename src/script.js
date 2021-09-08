@@ -1,6 +1,7 @@
 let apiKey = "27c721cb43320f0be5b6cd5b37ef3579";
 
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&`;
+let forecastApiUrl = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&`;
 
 function showPosition(position) {
   console.log(position);
@@ -9,7 +10,7 @@ function showPosition(position) {
   let units = "metric";
   axios
     .get(`${apiUrl}lat=${latitude}&lon=${longitude}&units=${units}&`)
-    .then(setCurrentTemperature);
+    .then(handleWeatherResponse);
 }
 
 function getCurrentPosition() {
@@ -22,7 +23,22 @@ function submitCityTemperature(event) {
   let units = "metric";
   axios
     .get(`${apiUrl}q=${inputCity.value}&units=${units}`)
-    .then(setCurrentTemperature);
+    .then(handleWeatherResponse);
+
+  axios
+    .get(`${forecastApiUrl}q=${inputCity.value}&units=${units}`)
+    .then(handleForecastResponse);
+}
+
+function handleForecastResponse(response) {
+  let forecastFriday = document.querySelector("#forecast-friday");
+  console.log(response);
+  forecastFriday.innerHTML = response.list[8].temp;
+}
+
+function handleWeatherResponse(response) {
+  setCurrentTemperature(response);
+  setWeatherDescriptors(response);
 }
 
 function setCurrentTemperature(response) {
@@ -36,6 +52,18 @@ function setCurrentTemperature(response) {
   currentHigh.innerHTML = "H: " + Math.round(response.data.main.temp_max) + "°";
   let currentLow = document.querySelector(".current-low");
   currentLow.innerHTML = "L: " + Math.round(response.data.main.temp_min) + "°";
+}
+
+function setWeatherDescriptors(response) {
+  let weatherDescriptor = document.querySelector("#descriptor");
+  weatherDescriptor.innerHTML = response.data.weather[0].description;
+  let feelsLikeDescriptor = document.querySelector("#feels-like-descriptor");
+  feelsLikeDescriptor.innerHTML =
+    Math.round(response.data.main.feels_like) + "°";
+  let humidityDescriptor = document.querySelector("#humidity-descriptor");
+  humidityDescriptor.innerHTML = response.data.main.humidity + "%";
+  let windDescriptor = document.querySelector("#wind-descriptor");
+  windDescriptor.innerHTML = Math.round(response.data.wind.speed) + "m/s";
 }
 
 /*function tempCelsius() {
@@ -52,8 +80,6 @@ let now = new Date();
 
 let h4 = document.querySelector("h4");
 
-let hours = now.getHours();
-let minutes = now.getMinutes();
 let days = [
   "Sunday",
   "Monday",
@@ -65,6 +91,15 @@ let days = [
 ];
 
 let day = days[now.getDay()];
+
+let hours = now.getHours();
+if (hours < 10) {
+  hours = `0${hours}`;
+}
+let minutes = now.getMinutes();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
 
 h4.innerHTML = `${day}, ${hours}:${minutes}`;
 
