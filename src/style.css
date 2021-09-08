@@ -57,13 +57,7 @@ a:link {
   transition: ease-in-out, 250ms;
   cursor: pointer;
 }
-.cloudy-image {
-  background-image: url("../images/clouds.png");
-  background-size: 250px;
-  background-repeat: no-repeat;
-  background-position: 60%;
-  min-height: 200px;
-}
+
 .city {
   font-size: 13px;
 }
