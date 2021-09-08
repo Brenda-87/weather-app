@@ -33,7 +33,7 @@ function submitCityTemperature(event) {
 function handleForecastResponse(response) {
   let forecastFriday = document.querySelector("#forecast-friday");
   console.log(response);
-  forecastFriday.innerHTML = response.list[8].temp;
+  forecastFriday.innerHTML = response.data.list[8].temp;
 }
 
 function handleWeatherResponse(response) {
@@ -44,14 +44,22 @@ function handleWeatherResponse(response) {
 function setCurrentTemperature(response) {
   console.log(response);
   let currentCity = document.querySelector("h1");
-  currentCity.innerHTML = response.data.name;
-
-  let currentTemperature = document.querySelector(".current-temp");
-  currentTemperature.innerHTML = Math.round(response.data.main.temp) + "°";
+  let currentTemperature = document.querySelector("#current-temp");
   let currentHigh = document.querySelector(".current-high");
-  currentHigh.innerHTML = "H: " + Math.round(response.data.main.temp_max) + "°";
   let currentLow = document.querySelector(".current-low");
+  let currentIcon = document.querySelector("#icon");
+
+  currentCity.innerHTML = response.data.name;
+  currentTemperature.innerHTML = Math.round(response.data.main.temp) + "°";
+  currentHigh.innerHTML = "H: " + Math.round(response.data.main.temp_max) + "°";
   currentLow.innerHTML = "L: " + Math.round(response.data.main.temp_min) + "°";
+  console.log(
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
+  currentIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function setWeatherDescriptors(response) {
@@ -67,12 +75,12 @@ function setWeatherDescriptors(response) {
 }
 
 /*function tempCelsius() {
-  let tempCelsius = document.querySelector(".current-temp");
+  let tempCelsius = document.querySelector("#current-temp");
   tempCelsius.innerHTML = 16;
 }
 
 function tempFahrenheit() {
-  let tempFahrenheit = document.querySelector(".current-temp");
+  let tempFahrenheit = document.querySelector("#current-temp");
   tempFahrenheit.innerHTML = 66;
 }*/
 
