@@ -31,9 +31,16 @@ function submitCityTemperature(event) {
 }
 
 function handleForecastResponse(response) {
-  let forecastFriday = document.querySelector("#forecast-friday");
-  console.log(response);
-  forecastFriday.innerHTML = response.data.list[8].temp;
+  let forecastDay1 = document.querySelector("#forecast-1");
+  let forecastDay2 = document.querySelector("#forecast-2");
+  let forecastDay3 = document.querySelector("#forecast-3");
+  let forecastDay4 = document.querySelector("#forecast-4");
+  let forecastDay5 = document.querySelector("#forecast-5");
+  forecastDay1.innerHTML = Math.round(response.data.list[8].main.temp) + "°";
+  forecastDay2.innerHTML = Math.round(response.data.list[16].main.temp) + "°";
+  forecastDay3.innerHTML = Math.round(response.data.list[24].main.temp) + "°";
+  forecastDay4.innerHTML = Math.round(response.data.list[32].main.temp) + "°";
+  forecastDay5.innerHTML = Math.round(response.data.list[40].main.temp) + "°";
 }
 
 function handleWeatherResponse(response) {
