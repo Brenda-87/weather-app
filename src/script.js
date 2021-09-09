@@ -45,7 +45,7 @@ function displayForecast(response) {
       forecastHTML =
         forecastHTML +
         `<div class="col-3 text-center">
-          <div class="card">
+          <div class="card" style="width: 8rem;">
             <div class="card-body forecast">
               <h5 class="card-title">${formatForecast(forecastDay.dt)}</h5>
               <p class="card-text">
@@ -112,24 +112,6 @@ function setWeatherDescriptors(response) {
   windDescriptor.innerHTML = Math.round(response.data.wind.speed) + "m/s";
 }
 
-function showFahrenheitTemp(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let tempFahrenheit = document.querySelector("#current-temp");
-  celsiusLink.classList.remove("active");
-  fahrenheitLink.classList.add("active");
-  tempFahrenheit.innerHTML = Math.round(fahrenheitTemperature) + "°";
-}
-
-function showCelsiusTemp(event) {
-  event.preventDefault();
-
-  let tempCelsius = document.querySelector("#current-temp");
-  celsiusLink.classList.add("active");
-  fahrenheitLink.classList.remove("active");
-  tempCelsius.innerHTML = Math.round(celsiusTemperature) + "°";
-}
-
 let celsiusTemperature = null;
 
 let now = new Date();
@@ -164,11 +146,5 @@ cityForm.addEventListener("submit", submitCityTemperature);
 
 let gpsIcon = document.querySelector(".gps-icon");
 gpsIcon.addEventListener("click", getCurrentPosition);
-
-let celsiusLink = document.querySelector("#celsius-link");
-celsiusLink.addEventListener("click", showCelsiusTemp);
-
-let fahrenheitLink = document.querySelector("#fahrenheit-link");
-fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 search("Amsterdam");
