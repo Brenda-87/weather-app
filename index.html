@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <title>Weather App</title>
+    <title>My Weather App</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -39,18 +39,13 @@
         <div class="col-1">
           <i class="fas fa-map-marker-alt gps-icon"></i>
         </div>
-        <div class="col-3">
+        <div class="col-4">
           <h1>Groningen</h1>
           <h4>Last updated: <span id="date"> </span></h4>
         </div>
         <div class="col-7">
           <form id="city-form">
-            <input
-              id="input-city"
-              type="text"
-              placeholder="Enter city here"
-              class="city"
-            />
+            <input id="input-city" type="text" placeholder="Enter city here" />
             <input type="submit" value="Search" class="btn btn-primary" />
           </form>
         </div>
@@ -96,70 +91,17 @@
         </div>
       </div>
 
-      <div class="row text-center mb-5">
-        <div class="col">
+      <div class="row text-center mb-3">
+        <div class="col-2">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body forecast">
               <h5 class="card-title">Fri</h5>
               <p class="card-text">
                 <i class="fas fa-cloud-sun week-icons"></i><br /><span
-                  id="forecast-1"
+                  class="forecast-max"
                 >
                   19°</span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Sat</h5>
-              <p class="card-text">
-                <i class="fas fa-cloud week-icons"></i><br />
-                <span id="forecast-2">18°</span>
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Sun</h5>
-              <p class="card-text">
-                <i class="fas fa-cloud week-icons"></i><br /><span
-                  id="forecast-3"
-                >
-                  19°</span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Mon</h5>
-              <p class="card-text">
-                <i class="fas fa-cloud-sun week-icons"></i><br /><span
-                  id="forecast-4"
-                >
-                  18°</span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
-        <div class="col">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Tue</h5>
-              <p class="card-text">
-                <i class="fas fa-sun week-icons"></i><br /><span
-                  id="forecast-5"
-                >
-                  20°</span
-                >
+                ><span class="forecast-min">12°</span>
               </p>
             </div>
           </div>

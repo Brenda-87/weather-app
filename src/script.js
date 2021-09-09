@@ -103,7 +103,7 @@ let celsiusTemperature = null;
 
 let now = new Date();
 
-let h4 = document.querySelector("h4");
+let updatedDate = document.querySelector("#date");
 
 let days = [
   "Sunday",
@@ -126,7 +126,7 @@ if (minutes < 10) {
   minutes = `0${minutes}`;
 }
 
-h4.innerHTML = `${day}, ${hours}:${minutes}`;
+updatedDate.innerHTML = `${day}, ${hours}:${minutes}`;
 
 let cityForm = document.querySelector("#city-form");
 cityForm.addEventListener("submit", submitCityTemperature);
