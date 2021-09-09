@@ -28,71 +28,56 @@ function submitCityTemperature(event) {
   search(inputCity.value);
 }
 
-function displayForecast() {
+function formatForecast(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return weekDays[day];
+}
+
+function displayForecast(response) {
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Fri", "Sat", "Sun", "Mon", "Tue"];
   let forecastHTML = `<div class="row">`;
 
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
+  forecast.forEach(function (forecastDay, index) {
+    if (index < 4) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-3 text-center">
           <div class="card">
             <div class="card-body forecast">
-              <h5 class="card-title">${day}</h5>
+              <h5 class="card-title">${formatForecast(forecastDay.dt)}</h5>
               <p class="card-text">
-                <i class="fas fa-cloud-sun week-icons"></i><br /><span
+                <img src="http://openweathermap.org/img/wn/${
+                  forecastDay.weather[0].icon
+                }@2x.png" alt="" /><br /><span
                   class="forecast-max"
                 >
-                  19° </span
-                ><span class="forecast-min">12°</span>
+                  ${Math.round(forecastDay.temp.max)}° </span
+                ><span class="forecast-min">${Math.round(
+                  forecastDay.temp.min
+                )}°</span>
               </p>
             </div>
           </div>
         </div>`;
+    }
   });
-
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
-  forecastHTML =
-    forecastHTML +
-    `<div class="col-2">
-          <div class="card">
-            <div class="card-body forecast">
-              <h5 class="card-title">Fri</h5>
-              <p class="card-text">
-                <i class="fas fa-cloud-sun week-icons"></i><br /><span
-                  class="forecast-max"
-                >
-                  19° </span
-                ><span class="forecast-min">12°</span>
-              </p>
-            </div>
-          </div>
-        </div>`;
-  forecastHTML = forecastHTML + `</div>`;
 }
-/*  axios
-    .get(`${forecastApiUrl}q=${inputCity.value}&units=${units}`)
-    .then(handleForecastResponse);
-}
-
-  function handleForecastResponse(response) {
-  let forecastDay1 = document.querySelector("#forecast-1");
-  let forecastDay2 = document.querySelector("#forecast-2");
-  let forecastDay3 = document.querySelector("#forecast-3");
-  let forecastDay4 = document.querySelector("#forecast-4");
-  let forecastDay5 = document.querySelector("#forecast-5");
-  forecastDay1.innerHTML = Math.round(response.data.list[8].main.temp) + "°";
-  forecastDay2.innerHTML = Math.round(response.data.list[16].main.temp) + "°";
-  forecastDay3.innerHTML = Math.round(response.data.list[15].main.temp) + "°";
-  forecastDay4.innerHTML = Math.round(response.data.list[22].main.temp) + "°";
-  forecastDay5.innerHTML = Math.round(response.data.list[29].main.temp) + "°";
-}*/
 
 function handleWeatherResponse(response) {
   setCurrentTemperature(response);
   setWeatherDescriptors(response);
+}
+
+function getForecast(coordinates) {
+  let apiKey = "27c721cb43320f0be5b6cd5b37ef3579";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=metric`;
+  console.log(apiUrl);
+  axios.get(apiUrl).then(displayForecast);
 }
 
 function setCurrentTemperature(response) {
@@ -112,6 +97,7 @@ function setCurrentTemperature(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  getForecast(response.data.coord);
 }
 
 function setWeatherDescriptors(response) {
@@ -186,5 +172,3 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 search("Amsterdam");
-
-displayForecast();

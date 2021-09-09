@@ -60,7 +60,7 @@ a:link {
 
 .card {
   border: 2px solid;
-  background: rgb(234, 252, 253);
+  background: #79c2d0;
 }
 .card-title {
   font-size: 13px;
@@ -69,6 +69,7 @@ a:link {
 }
 .card-text {
   font-size: 12px;
+  text-align: center;
 }
 .current-temp {
   font-family: "Rubik", sans-serif;
