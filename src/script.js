@@ -17,20 +17,22 @@ function getCurrentPosition() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
+function search(city) {
+  let units = "metric";
+  axios.get(`${apiUrl}q=${city}&units=${units}`).then(handleWeatherResponse);
+}
+
 function submitCityTemperature(event) {
   event.preventDefault();
   let inputCity = document.querySelector("#input-city");
-  let units = "metric";
-  axios
-    .get(`${apiUrl}q=${inputCity.value}&units=${units}`)
-    .then(handleWeatherResponse);
-
-  axios
+  search(inputCity.value);
+}
+/*  axios
     .get(`${forecastApiUrl}q=${inputCity.value}&units=${units}`)
     .then(handleForecastResponse);
 }
 
-function handleForecastResponse(response) {
+  function handleForecastResponse(response) {
   let forecastDay1 = document.querySelector("#forecast-1");
   let forecastDay2 = document.querySelector("#forecast-2");
   let forecastDay3 = document.querySelector("#forecast-3");
@@ -41,7 +43,7 @@ function handleForecastResponse(response) {
   forecastDay3.innerHTML = Math.round(response.data.list[15].main.temp) + "°";
   forecastDay4.innerHTML = Math.round(response.data.list[22].main.temp) + "°";
   forecastDay5.innerHTML = Math.round(response.data.list[29].main.temp) + "°";
-}
+}*/
 
 function handleWeatherResponse(response) {
   setCurrentTemperature(response);
@@ -49,20 +51,18 @@ function handleWeatherResponse(response) {
 }
 
 function setCurrentTemperature(response) {
-  console.log(response);
   let currentCity = document.querySelector("h1");
   let currentTemperature = document.querySelector("#current-temp");
   let currentHigh = document.querySelector(".current-high");
   let currentLow = document.querySelector(".current-low");
   let currentIcon = document.querySelector("#icon");
 
+  celsiusTemperature = response.data.main.temp;
+
   currentCity.innerHTML = response.data.name;
-  currentTemperature.innerHTML = Math.round(response.data.main.temp) + "°";
+  currentTemperature.innerHTML = Math.round(celsiusTemperature) + "°";
   currentHigh.innerHTML = "H: " + Math.round(response.data.main.temp_max) + "°";
   currentLow.innerHTML = "L: " + Math.round(response.data.main.temp_min) + "°";
-  console.log(
-    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-  );
   currentIcon.setAttribute(
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
@@ -81,15 +81,25 @@ function setWeatherDescriptors(response) {
   windDescriptor.innerHTML = Math.round(response.data.wind.speed) + "m/s";
 }
 
-/*function tempCelsius() {
-  let tempCelsius = document.querySelector("#current-temp");
-  tempCelsius.innerHTML = 16;
+function showFahrenheitTemp(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let tempFahrenheit = document.querySelector("#current-temp");
+  celsiusLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+  tempFahrenheit.innerHTML = Math.round(fahrenheitTemperature) + "°";
 }
 
-function tempFahrenheit() {
-  let tempFahrenheit = document.querySelector("#current-temp");
-  tempFahrenheit.innerHTML = 66;
-}*/
+function showCelsiusTemp(event) {
+  event.preventDefault();
+
+  let tempCelsius = document.querySelector("#current-temp");
+  celsiusLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+  tempCelsius.innerHTML = Math.round(celsiusTemperature) + "°";
+}
+
+let celsiusTemperature = null;
 
 let now = new Date();
 
@@ -124,11 +134,10 @@ cityForm.addEventListener("submit", submitCityTemperature);
 let gpsIcon = document.querySelector(".gps-icon");
 gpsIcon.addEventListener("click", getCurrentPosition);
 
-getCurrentPosition();
+let celsiusLink = document.querySelector("#celsius-link");
+celsiusLink.addEventListener("click", showCelsiusTemp);
 
-/*let unitCelsius = document.querySelector("#unit-celsius");
-unitCelsius.addEventListener("click", tempCelsius);
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
-let unitFahrenheit = document.querySelector("#unit-fahrenheit");
-unitFahrenheit.addEventListener("click", tempFahrenheit);
-*/
+search("Amsterdam");

@@ -87,6 +87,16 @@ a:link {
 .divider {
   border-bottom: 2px solid black;
 }
+.active {
+  color: black;
+  cursor: default;
+}
+
+.active:hover {
+  text-decoration: none;
+  color: black;
+}
+
 #current-temp {
   font-size: 100px;
   text-align: center;
