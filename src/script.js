@@ -27,6 +27,51 @@ function submitCityTemperature(event) {
   let inputCity = document.querySelector("#input-city");
   search(inputCity.value);
 }
+
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Fri", "Sat", "Sun", "Mon", "Tue"];
+  let forecastHTML = `<div class="row">`;
+
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+          <div class="card">
+            <div class="card-body forecast">
+              <h5 class="card-title">${day}</h5>
+              <p class="card-text">
+                <i class="fas fa-cloud-sun week-icons"></i><br /><span
+                  class="forecast-max"
+                >
+                  19° </span
+                ><span class="forecast-min">12°</span>
+              </p>
+            </div>
+          </div>
+        </div>`;
+  });
+
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+  forecastHTML =
+    forecastHTML +
+    `<div class="col-2">
+          <div class="card">
+            <div class="card-body forecast">
+              <h5 class="card-title">Fri</h5>
+              <p class="card-text">
+                <i class="fas fa-cloud-sun week-icons"></i><br /><span
+                  class="forecast-max"
+                >
+                  19° </span
+                ><span class="forecast-min">12°</span>
+              </p>
+            </div>
+          </div>
+        </div>`;
+  forecastHTML = forecastHTML + `</div>`;
+}
 /*  axios
     .get(`${forecastApiUrl}q=${inputCity.value}&units=${units}`)
     .then(handleForecastResponse);
@@ -141,3 +186,5 @@ let fahrenheitLink = document.querySelector("#fahrenheit-link");
 fahrenheitLink.addEventListener("click", showFahrenheitTemp);
 
 search("Amsterdam");
+
+displayForecast();
